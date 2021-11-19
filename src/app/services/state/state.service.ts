@@ -24,6 +24,15 @@ export class StateService {
     this.statesSubject.next(states);
   }
 
+  async apiCallSync(): Promise<void> {
+    this.updateStates();
+  }
+
+  private async updateStates(): Promise<void> {
+    const states = await this.apiService.getStates();
+    this.statesSubject.next(states);
+  }
+
   getCurrentStates(): State[] {
     return this.statesSubject.value;
   }
