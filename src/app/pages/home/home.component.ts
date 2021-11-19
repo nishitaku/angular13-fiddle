@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from 'src/app/services/state/state.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  states$ = this.stateService.states$;
 
-  ngOnInit(): void {}
+  constructor(private stateService: StateService) {}
+
+  ngOnInit(): void {
+    this.stateService.apiCall();
+  }
 }

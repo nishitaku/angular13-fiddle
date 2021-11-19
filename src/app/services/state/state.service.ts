@@ -12,23 +12,23 @@ export interface State {
   providedIn: 'root',
 })
 export class StateService {
-  private stateSubject = new BehaviorSubject<State[]>([]);
-  get state$() {
-    return this.stateSubject.asObservable();
+  private statesSubject = new BehaviorSubject<State[]>([]);
+  get states$() {
+    return this.statesSubject.asObservable();
   }
 
   constructor(private apiService: ApiService) {}
 
   async apiCall(): Promise<void> {
     const states = await this.apiService.getStates();
-    this.stateSubject.next(states);
+    this.statesSubject.next(states);
   }
 
   getCurrentStates(): State[] {
-    return this.stateSubject.value;
+    return this.statesSubject.value;
   }
 
   setCurrentState(states: State[]) {
-    this.stateSubject.next(states);
+    this.statesSubject.next(states);
   }
 }

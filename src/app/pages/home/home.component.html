@@ -1,1 +1,4 @@
-<p>home works!</p>
+<p>States</p>
+<div *ngFor="let state of states$ | async">
+  {{ state | json }}
+</div>
