@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ApiService } from '../api/api.service';
 
 export interface State {
   id: string;
@@ -16,7 +17,12 @@ export class StateService {
     return this.stateSubject.asObservable();
   }
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
+
+  async apiCall(): Promise<void> {
+    const states = await this.apiService.getStates();
+    this.stateSubject.next(states);
+  }
 
   getCurrentStates(): State[] {
     return this.stateSubject.value;
