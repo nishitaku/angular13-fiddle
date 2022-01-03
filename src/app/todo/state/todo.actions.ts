@@ -15,3 +15,15 @@ export const loadAllFailure = createAction(
   '[Todo API] Load All Failure',
   props<{ error: any }>()
 );
+
+export const load = createAction('[Todo Page] Load', props<{ id: number }>());
+
+export const loadSuccess = createAction(
+  '[Todo API] Load Success',
+  props<{ todo: Todo }>()
+);
+
+export const loadFailure = createAction(
+  '[Todo API] Load Failure',
+  props<{ error: any }>()
+);
