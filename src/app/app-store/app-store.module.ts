@@ -12,7 +12,12 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production
+      ? StoreDevtoolsModule.instrument({
+          name: 'NgRx Demo',
+          logOnly: environment.production,
+        })
+      : [],
   ],
 })
 export class AppStoreModule {}
