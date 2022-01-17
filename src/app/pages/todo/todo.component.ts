@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoFacade } from 'src/app/todo/state/todo.facade';
+import { TodoFacade } from 'src/app/todo/store/todo.facade';
 
 @Component({
   selector: 'app-todo',

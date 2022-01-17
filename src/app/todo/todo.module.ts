@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { todoFeatureKey } from './state';
+import { todoFeatureKey } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { TodoEffects } from './state/todo.effects';
-import { reducer } from './state/todo.reducer';
+import { TodoEffects } from './store/todo.effects';
+import { reducer } from './store/todo.reducer';
 
 @NgModule({
   declarations: [],
