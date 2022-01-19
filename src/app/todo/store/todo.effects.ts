@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { TodoService } from 'src/app/services/todo/todo.service';
+import { TodoService } from 'src/app/shared/services/todo/todo.service';
 import * as TodoActions from './todo.actions';
 
 @Injectable()
