@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "angular13-fiddle"
+  "defaultProject": "angular13-fiddle",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
