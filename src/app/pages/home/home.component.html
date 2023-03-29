@@ -1,4 +1,11 @@
 <p>States</p>
-<div *ngFor="let state of states$ | async">
-  {{ state | json }}
+<div *ngFor="let state of states$ | async" style="background-color: lightblue">
+  <pre>{{ state | json }}</pre>
+</div>
+
+<div
+  *ngIf="placeholderTodos$ | async as placeholderTodos"
+  style="background-color: lightcoral"
+>
+  <pre>{{ placeholderTodos | json }}</pre>
 </div>
