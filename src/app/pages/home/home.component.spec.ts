@@ -126,7 +126,7 @@ describe('HomeComponent', () => {
       },
     ];
 
-    placeholderService.getTodosFromPlaceholder().subscribe((res) => {
+    placeholderService.getPlaceholderTodos().subscribe((res) => {
       expect(res).toEqual(dummyData);
     });
     // placeholderService.getTodosFromPlaceholder();

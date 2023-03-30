@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { PlaceholderTodo } from 'src/app/shared/services/placeholder/placeholder.service';
 import { Todo } from '../models/todo.model';
 
 export const loadAll = createAction(
@@ -8,7 +9,7 @@ export const loadAll = createAction(
 
 export const loadAllSuccess = createAction(
   '[Todo API] Load All Success',
-  props<{ todos: Todo[] }>()
+  props<{ todos: PlaceholderTodo[] }>()
 );
 
 export const loadAllFailure = createAction(
@@ -20,7 +21,7 @@ export const load = createAction('[Todo Page] Load', props<{ id: number }>());
 
 export const loadSuccess = createAction(
   '[Todo API] Load Success',
-  props<{ todo: Todo }>()
+  props<{ todo: PlaceholderTodo }>()
 );
 
 export const loadFailure = createAction(

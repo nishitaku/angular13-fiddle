@@ -15,9 +15,15 @@ export interface PlaceholderTodo {
 export class PlaceholderService {
   constructor(private http: HttpClient) {}
 
-  getTodosFromPlaceholder(): Observable<PlaceholderTodo[]> {
+  getPlaceholderTodos(): Observable<PlaceholderTodo[]> {
     return this.http.get<PlaceholderTodo[]>(
       'https://jsonplaceholder.typicode.com/todos?userId=1'
+    );
+  }
+
+  getPlaceholderTodoById(id: number): Observable<PlaceholderTodo> {
+    return this.http.get<PlaceholderTodo>(
+      `https://jsonplaceholder.typicode.com/todos?userId=1&id=${id}`
     );
   }
 }

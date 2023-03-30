@@ -22,6 +22,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.stateService.apiCall();
-    this.placeholderTodos$ = this.placeholderService.getTodosFromPlaceholder();
+    this.placeholderTodos$ = this.placeholderService.getPlaceholderTodos();
   }
 }

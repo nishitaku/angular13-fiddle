@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { Todo } from '../models/todo.model';
+import { PlaceholderTodo } from 'src/app/shared/services/placeholder/placeholder.service';
 import * as TodoActions from './todo.actions';
 
 export const todoFeatureKey = 'todo';
 
 export interface State {
   loading: boolean;
-  todos: Todo[];
+  todos: PlaceholderTodo[];
   error?: any;
 }
 
