@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { TodoModule } from '../todo.module';
 import * as TodoSelectors from './todo.selectors';
 import * as TodoActions from './todo.actions';
 

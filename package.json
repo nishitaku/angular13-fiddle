@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:home": "ng test --include=src/app/pages/home/*.spec.ts",
+    "test:todo": "ng test --include=src/app/todo/pages/todo/*.spec.ts",
     "fmt:check": "prettier --check \"src/**/*.{ts,html,scss}\"",
     "fmt:fix": "prettier --write \"src/**/*.{ts,html,scss}\"",
     "lint": "ng lint"

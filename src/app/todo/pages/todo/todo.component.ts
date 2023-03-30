@@ -14,8 +14,8 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoFacade.loadAll();
-    this.todoFacade.todos$.subscribe((todos) => {
-      console.warn(`todo update ${todos}`);
-    });
+    // this.todoFacade.todos$.subscribe((todos) => {
+    //   console.warn(`todo update ${todos}`);
+    // });
   }
 }
