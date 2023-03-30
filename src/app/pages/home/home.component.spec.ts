@@ -2,8 +2,6 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   ComponentFixture,
   fakeAsync,
-  flush,
-  TestBed,
   tick,
   waitForAsync,
 } from '@angular/core/testing';
@@ -11,6 +9,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { render, screen } from '@testing-library/angular';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { StateService } from 'src/app/shared/services/state/state.service';
 
@@ -19,31 +18,29 @@ import {
   PlaceholderService,
   PlaceholderTodo,
 } from 'src/app/shared/services/placeholder/placeholder.service';
+import { DebugElement } from '@angular/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let debugElement: DebugElement;
   let stateService: StateService;
   let placeholderService: PlaceholderService;
   let apiService: ApiService;
   let httpMock: HttpTestingController;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+  beforeEach(async () => {
+    const renderResult = await render(HomeComponent, {
       imports: [HttpClientModule, HttpClientTestingModule],
-    }).compileComponents();
-
-    stateService = TestBed.inject(StateService);
-    placeholderService = TestBed.inject(PlaceholderService);
-    apiService = TestBed.inject(ApiService);
-    httpMock = TestBed.inject(HttpTestingController);
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    });
+    fixture = renderResult.fixture;
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    debugElement = fixture.debugElement;
+
+    stateService = debugElement.injector.get(StateService);
+    placeholderService = debugElement.injector.get(PlaceholderService);
+    apiService = debugElement.injector.get(ApiService);
+    httpMock = debugElement.injector.get(HttpTestingController);
   });
 
   it('should create', () => {
@@ -78,7 +75,7 @@ describe('HomeComponent', () => {
     tick(2000);
     fixture.detectChanges();
     // assert
-    expect(fixture.nativeElement.textContent).toContain('name3');
+    expect(screen.getByText(/name3/i)).toBeTruthy();
   }));
 
   // 動くが遅いので停止
@@ -90,7 +87,7 @@ describe('HomeComponent', () => {
       // assert
       fixture.whenStable().then(() => {
         fixture.detectChanges();
-        expect(fixture.nativeElement.textContent).toContain('name3');
+        expect(screen.getByText(/name3/i)).toBeTruthy();
       });
     })
   );
@@ -114,10 +111,8 @@ describe('HomeComponent', () => {
     tick(2000);
     // component.ngOnInit();
     fixture.detectChanges();
-    // flush();
-    // fixture.detectChanges();
     // assert
-    expect(fixture.nativeElement.textContent).toContain('hogehoge');
+    expect(screen.getByText(/hogehoge/i)).toBeTruthy();
   }));
 
   it('placeholder apiの確認', fakeAsync(() => {
