@@ -15,9 +15,9 @@ export interface PlaceholderTodo {
 export class PlaceholderService {
   constructor(private http: HttpClient) {}
 
-  getTodosFromPlaceholder(): Observable<any> {
-    return this.http
-      .get('https://jsonplaceholder.typicode.com/todos?userId=1')
-      .pipe(tap((response) => console.warn(response)));
+  getTodosFromPlaceholder(): Observable<PlaceholderTodo[]> {
+    return this.http.get<PlaceholderTodo[]>(
+      'https://jsonplaceholder.typicode.com/todos?userId=1'
+    );
   }
 }

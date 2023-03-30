@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PlaceholderService } from 'src/app/shared/services/placeholder/placeholder.service';
+import { Observable } from 'rxjs';
+import {
+  PlaceholderService,
+  PlaceholderTodo,
+} from 'src/app/shared/services/placeholder/placeholder.service';
 import { StateService } from 'src/app/shared/services/state/state.service';
 
 @Component({
@@ -9,7 +13,7 @@ import { StateService } from 'src/app/shared/services/state/state.service';
 })
 export class HomeComponent implements OnInit {
   states$ = this.stateService.states$;
-  placeholderTodos$: any;
+  placeholderTodos$?: Observable<PlaceholderTodo[]>;
 
   constructor(
     private stateService: StateService,
