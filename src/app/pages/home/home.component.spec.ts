@@ -19,6 +19,7 @@ import {
   PlaceholderTodo,
 } from 'src/app/shared/services/placeholder/placeholder.service';
 import { DebugElement } from '@angular/core';
+import { skip } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -53,44 +54,59 @@ describe('HomeComponent', () => {
 
   it('StateService.apiCallが呼び出されていること', () => {
     // arrange
-    spyOn(stateService, 'apiCall').and.callThrough();
+    const spy = jest.spyOn(stateService, 'apiCall');
     // act
     component.ngOnInit();
     // assert
-    expect(stateService.apiCall).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('ApiService.getStatesが呼び出されていること', () => {
     // arrange
-    spyOn(apiService, 'getStates').and.callThrough();
+    const spy = jest.spyOn(apiService, 'getStates');
     // act
     component.ngOnInit();
     // assert
-    expect(apiService.getStates).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
-  it('表示の確認(fakeAsync)', fakeAsync(() => {
+  it('Component.states$にデータが流れること', (done) => {
+    // arrange
+    component.states$.pipe(skip(1)).subscribe((state) => {
+      expect(state).toEqual([
+        { id: '001', name: 'name1', isEnable: true },
+        { id: '002', name: 'name2', isEnable: true },
+        { id: '003', name: 'name3', isEnable: true },
+      ]);
+      done();
+    });
     // act
     component.ngOnInit();
-    tick(2000);
-    fixture.detectChanges();
+
     // assert
-    expect(screen.getByText(/name3/i)).toBeTruthy();
-  }));
+  });
+
+  it('表示の確認(fakeAsync)', (done) => {
+    // arrange
+    component.states$.pipe(skip(1)).subscribe((state) => {
+      fixture.detectChanges();
+      expect(screen.getByText(/name3/i)).toBeTruthy();
+      done();
+    });
+    // act
+    component.ngOnInit();
+  });
 
   // 動くが遅いので停止
-  xit(
-    '表示の確認(waitForAsync)',
-    waitForAsync(() => {
-      // act
-      component.ngOnInit();
-      // assert
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(screen.getByText(/name3/i)).toBeTruthy();
-      });
-    })
-  );
+  xit('表示の確認(waitForAsync)', waitForAsync(() => {
+    // act
+    component.ngOnInit();
+    // assert
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(screen.getByText(/name3/i)).toBeTruthy();
+    });
+  }));
 
   it('placeholder apiの表示確認', fakeAsync(() => {
     // arrange

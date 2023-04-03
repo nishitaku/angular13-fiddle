@@ -42,11 +42,11 @@ describe('TodoComponent', () => {
 
   it('PlaceholderService#getPlaceholderTodosが呼び出されていること', () => {
     // arrange
-    spyOn(placeholderService, 'getPlaceholderTodos').and.callThrough();
+    const spy = jest.spyOn(placeholderService, 'getPlaceholderTodos');
     // act
     component.ngOnInit();
     // assert
-    expect(placeholderService.getPlaceholderTodos).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it('ngOnInit', fakeAsync(() => {
